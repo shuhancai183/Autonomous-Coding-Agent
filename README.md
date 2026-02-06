@@ -43,24 +43,6 @@ It demonstrates a practical autonomous repair loop:
 
 
 ---
-
-
-## Why This Is Production-Minded
-
-
-- **Traceability:** every tool response is tagged (e.g., `[ReadFile]`, `[RunTests]`) so you can follow the agent’s decisions.
-- **Strict tool input protocol:** `WriteCode` and `SearchInFile` accept a KV-block format parsed by a dedicated parser (reduces prompt injection / malformed calls).
-- **Safety guardrails:**
-  - `tests/` enforced read-only at tool level
-  - `pytest` executed without `shell=True` to reduce shell-injection risk
-  - test execution timeout (`120s`) to prevent hangs
-- **Token & UX controls:** file tree listing is directory-first sorted and truncated.
-- **State/fixture awareness:** notes in the prompt warn about `pytest` tests importing globals directly; reset logic should mutate in-place instead of rebinding.
-
-
----
-
-
 ## Demo
 
 
@@ -91,16 +73,11 @@ pytest
 
 Environment Variables
 
-Create a .env file in the repository root (do not commit it):
+Create a .env file:
 
 OPENAI_API_KEY=YOUR_KEY
 
 The program uses python-dotenv to load environment variables. ChatOpenAI reads OPENAI_API_KEY from the environment automatically.
-
-Add this to .gitignore:
-
-.env
-Run
 
 Place projects under:
 
@@ -111,4 +88,5 @@ Run:
 python Autonomous Coding Agent.py
 
 The agent iterates each project directory, inspects code, writes fixes (excluding tests), and reruns pytest until completion or limits are reached.
+
 
