@@ -45,7 +45,7 @@ It demonstrates a practical autonomous repair loop:
 ---
 
 
-## Why This Is Production-Minded (Not Just a Demo)
+## Why This Is Production-Minded
 
 
 - **Traceability:** every tool response is tagged (e.g., `[ReadFile]`, `[RunTests]`) so you can follow the agent’s decisions.
@@ -111,3 +111,4 @@ Run:
 python Autonomous Coding Agent.py
 
 The agent iterates each project directory, inspects code, writes fixes (excluding tests), and reruns pytest until completion or limits are reached.
+
